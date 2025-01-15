@@ -41,7 +41,7 @@ Find typos in literal blocks
 
 
 Find typos in literal quotes inside literal quotes
-----------------------------------------------
+--------------------------------------------------
 
 ..
 
