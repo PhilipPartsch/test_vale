@@ -44,7 +44,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install setuptools
         python -m pip install -r ./docs/requirements.txt
-        python -m pip install .
     - name: Lint the project with sphinx-lint
       run: |
         sphinx-lint
