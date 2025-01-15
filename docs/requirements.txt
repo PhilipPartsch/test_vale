@@ -1,0 +1,15 @@
+vale
+sphinx
+sphinxcontrib.jquery
+sphinx-needs
+matplotlib
+sphinx-copybutton
+sphinxcontrib-programoutput
+sphinx-design
+click
+tabulate
+sphinx-immaterial
+sphinx-rtd-theme
+esbonio>=0.13.0
+sphinx-preview
+sphinx-lint
