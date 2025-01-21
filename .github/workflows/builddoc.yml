@@ -97,7 +97,7 @@ jobs:
           path: ./public/
       - name: copy .vale.ini from static part to root folder
         run: |
-          cp ./public/_static/.vale.ini ./.vale.ini
+          cp ./public/_static/vale_for_final_html.ini ./.vale.ini
       - name: Lint the html files with vale
         uses: errata-ai/vale-action@v2.1.1
         with:
