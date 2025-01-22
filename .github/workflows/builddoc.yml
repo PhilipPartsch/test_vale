@@ -100,7 +100,7 @@ jobs:
       - name: Check out ${{github.repository}}
         uses: actions/checkout@v4
         with:
-          ref: ${PAGES_BRANCH}
+          ref: pages
 
       - name: create folder for branch pages
         run: |
@@ -114,10 +114,6 @@ jobs:
           name: sphinx-public
           path: ./${{ github.head_ref || github.ref_name }}
 
-      - name: copy .vale.ini from static part to root folder
-        run: |
-          cp ./"${SOURCE_BRANCH_NAME}"/_static/vale_for_final_html.ini ./.vale.ini
-
       # Commit changes, if there are any
       - name: Commit changes, if any
         run: |
@@ -128,11 +124,17 @@ jobs:
           git add .
           git commit \
             -m "Documentation updated for Branch ${SOURCE_BRANCH_NAME} with commit ${{github.repository}}@${{ github.sha }}"
-      # Push the branch to the target repository
+
+        # Push the branch to the target repository
       - name: Push content to branch pages
         run: |
           git status
           git push -u origin "${PAGES_BRANCH}"
+
+      - name: copy .vale.ini from static part to root folder
+        run: |
+          cp ./"${SOURCE_BRANCH_NAME}"/_static/vale_for_final_html.ini ./.vale.ini
+
       - name: Lint the html files with vale
         uses: errata-ai/vale-action@v2.1.1
         with:
