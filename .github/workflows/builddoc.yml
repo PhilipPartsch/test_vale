@@ -106,6 +106,8 @@ jobs:
         run: |
           git -C "${{github.repository}}" fetch origin "${PAGES_BRANCH}" || true
           git -C "${{github.repository}}" branch -a
+          git -C "${{github.repository}}" checkout "${PAGES_BRANCH}"
+          git -C "${{github.repository}}" pull
       - name: Download sphinx public folder
         uses: actions/download-artifact@v4
         with:
