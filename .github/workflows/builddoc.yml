@@ -119,9 +119,11 @@ jobs:
           cp ./public/_static/vale_for_final_html.ini ./.vale.ini
       - name: create folder for branch pages
         run: |
+          echo "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
           mkdir -p "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
           rm -r -f "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"/*
           mv ./public/* ./"${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
+          ls -al "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
       # Commit changes, if there are any
       - name: Commit changes, if any
         run: |
@@ -140,7 +142,7 @@ jobs:
         with:
           # github-pr-check, github-pr-review, github-check
           reporter: github-check
-          files: ./"${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
+          files: ./"${{github.repository}}"/"${{ github.head_ref || github.ref_name }}"
 
 
   # Deployment job
