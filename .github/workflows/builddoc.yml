@@ -45,7 +45,6 @@ jobs:
       with:
         # github-pr-check, github-pr-review, github-check
         reporter: github-check
-        fail_on_error: false
 
 
   build:
@@ -91,7 +90,22 @@ jobs:
   lint_final_html_files:
     runs-on: ubuntu-latest
     needs: build
+    env:
+      PAGES_BRANCH: pages
+      GIT_AUTHOR_NAME: ${{github.repository_owner}}
+      GIT_AUTHOR_EMAIL: ${{github.repository_owner}}@users.noreply.github.com
+      SOURCE_BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
     steps:
+      - name: Check out ${{github.repository}}
+        uses: actions/checkout@v2
+        with:
+          repository: ${{github.repository}}
+          token: ${{github.token}}
+          path: ${{github.repository}}
+      - name: Fetch ${PAGES_BRANCH} in ${{github.repository}}
+        run: |
+          git -C "${{github.repository}}" fetch origin "${PAGES_BRANCH}" || true
+          git -C "${{github.repository}}" branch -a
       - name: Download sphinx public folder
         uses: actions/download-artifact@v4
         with:
@@ -100,6 +114,23 @@ jobs:
       - name: copy .vale.ini from static part to root folder
         run: |
           cp ./public/_static/vale_for_final_html.ini ./.vale.ini
+      - name: create folder for branch
+        run: |
+          mkdir -p "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
+          rm -r -f "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"/*
+          mv ./public/* ./"${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
+      # Commit changes, if there are any
+      - name: Commit changes, if any
+        run: |
+          git -C "${{github.repository}}" config user.name "${GIT_AUTHOR_NAME}"
+          git -C "${{github.repository}}" config user.email "${GIT_AUTHOR_EMAIL}"
+          git -C "${{github.repository}}" add .
+          git -C "${{github.repository}}" commit \
+            -m "Documentation updated for Branch ${SOURCE_BRANCH_NAME} with commit ${{github.repository}}@${{ github.sha }}"
+
+      # Push the branch to the target repository
+      - name: Push topic branch
+        run: git -C "${{github.repository}}" push -u origin "${PAGES_BRANCH}"
       - name: Lint the html files with vale
         uses: errata-ai/vale-action@v2.1.1
         with:
@@ -116,6 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     if: github.ref == 'refs/heads/main'
+    # execute deplyment to github pages only on main branch
     steps:
       - name: Download sphinx public folder
         uses: actions/download-artifact@v4
