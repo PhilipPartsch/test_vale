@@ -139,7 +139,7 @@ jobs:
         with:
           # github-pr-check, github-pr-review, github-check
           reporter: github-check
-          files: ./public/
+          files: ./"${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
 
 
   # Deployment job
