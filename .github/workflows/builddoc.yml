@@ -102,7 +102,7 @@ jobs:
           repository: ${{github.repository}}
           token: ${{github.token}}
           path: ${{github.repository}}
-      - name: Fetch ${PAGES_BRANCH} in ${{github.repository}}
+      - name: Fetch Branch pages in ${{github.repository}}
         run: |
           git -C "${{github.repository}}" fetch origin "${PAGES_BRANCH}" || true
           git -C "${{github.repository}}" branch -a
@@ -114,7 +114,7 @@ jobs:
       - name: copy .vale.ini from static part to root folder
         run: |
           cp ./public/_static/vale_for_final_html.ini ./.vale.ini
-      - name: create folder for branch
+      - name: create folder for branch pages
         run: |
           mkdir -p "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"
           rm -r -f "${{github.repository}}"/"${SOURCE_BRANCH_NAME}"/*
@@ -127,10 +127,11 @@ jobs:
           git -C "${{github.repository}}" add .
           git -C "${{github.repository}}" commit \
             -m "Documentation updated for Branch ${SOURCE_BRANCH_NAME} with commit ${{github.repository}}@${{ github.sha }}"
-
       # Push the branch to the target repository
-      - name: Push topic branch
-        run: git -C "${{github.repository}}" push -u origin "${PAGES_BRANCH}"
+      - name: Push content to branch pages
+        run: |
+          git -C "${{github.repository}}" status
+          git -C "${{github.repository}}" push -u origin
       - name: Lint the html files with vale
         uses: errata-ai/vale-action@v2.1.1
         with:
