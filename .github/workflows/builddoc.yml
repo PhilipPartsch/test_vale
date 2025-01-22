@@ -9,7 +9,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
   pages: write
   id-token: write
 
@@ -133,7 +134,7 @@ jobs:
       - name: Push content to branch pages
         run: |
           git -C "${{github.repository}}" status
-          git -C "${{github.repository}}" push -u origin
+          git -C "${{github.repository}}" push -u origin "${PAGES_BRANCH}"
       - name: Lint the html files with vale
         uses: errata-ai/vale-action@v2.1.1
         with:
