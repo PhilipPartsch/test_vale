@@ -140,7 +140,7 @@ jobs:
         with:
           # github-pr-check, github-pr-review, github-check
           reporter: github-check
-          files: ./${{ github.head_ref || github.ref_name }}
+          files: ./${{ github.head_ref || github.ref_name }}/
 
 
   # Deployment job
