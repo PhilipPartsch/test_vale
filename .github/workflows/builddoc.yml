@@ -40,6 +40,9 @@ jobs:
         python -m pip install docutils sphinx-lint vale
     - name: Lint the project with sphinx-lint
       run: |
+        python .vale/scripts/replace_directives.py
+    - name: replace directives in rst
+      run: |
         sphinx-lint
     - name: Lint the project with vale
       uses: errata-ai/vale-action@v2.1.1
