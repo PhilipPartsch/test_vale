@@ -73,8 +73,6 @@ needs_extra_options = [
    'pathfile', # file path in needs e.g. for test coverage
    'interface_definition', # to store in machine readable code interface definition
    'test_status',
-
-   'github_edit_url',
 ]
 
 needs_services = {}
@@ -328,10 +326,6 @@ needs_global_options = {
     'test_status': [
         ('[[check_verified()]]', 'type=="sw_req"'),
     ],
-    'post_template': [
-        ('evaluation_post_template', 'type=="evaluation"'),
-    ],
-    'github_edit_url': '[[get_githoster_edit_url_for_need("id")]]',
 }
 
 needs_render_context = {

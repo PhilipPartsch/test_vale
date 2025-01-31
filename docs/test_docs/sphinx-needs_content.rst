@@ -4,7 +4,6 @@ Test file with Sphinx-Needs content
 .. sw_req:: Definition: list of dictionaries
    :id: SWRQ_LIST_OF_DICTS
    :status: verified
-   :satisfies: CSTRQ_MERGE_DICTS
 
    The above defined function to merge dictionaries shall treat list as:
    none, one, two or many dictionaries organized in a list.
