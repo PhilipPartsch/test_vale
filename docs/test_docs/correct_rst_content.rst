@@ -7,7 +7,7 @@ Tests
 Find typos
 ----------
 
-Vale shall give me a hint that, there are typos in my texxt.
+Vale shall give me a hint that, there are typos in my text.
 
 
 Find typos in notes
@@ -15,7 +15,7 @@ Find typos in notes
 
 .. note::
 
-   Vale shall give me a hint that, there are typos in my noote.
+   Vale shall give me a hint that, there are typos in my note.
 
 
 Find typos in notes inside notes
@@ -27,7 +27,7 @@ Find typos in notes inside notes
 
    .. note::
 
-      Vale shall give me a hint that, there are typos in my secoound note.
+      Vale shall give me a hint that, there are typos in my secound note.
 
 
 Find typos in literal blocks
@@ -35,7 +35,7 @@ Find typos in literal blocks
 
 ..
 
-   Vale shall give me a hint that, there are typos in my litteral blocks.
+   Vale shall give me a hint that, there are typos in my literal blocks.
 
 
 Find typos in literal quotes inside literal quotes
@@ -47,13 +47,13 @@ Find typos in literal quotes inside literal quotes
 
    ..
 
-      Vale shall give me a hint that, there are typos in my liiteral quote inside a literal quote.
+      Vale shall give me a hint that, there are typos in my literal quote inside a literal quote.
 
 
 Find typos in block quotes
 --------------------------
 
-   Vale shall give me a hint that, there are typos in my blocck quote.
+   Vale shall give me a hint that, there are typos in my block quote.
 
 
 Find typos in block quotes inside block quotes
@@ -61,7 +61,7 @@ Find typos in block quotes inside block quotes
 
    Vale shall give me a hint that, there are typos in my block quote.
 
-      Vale shall give me a hint that, there are typos in my blockk quote inside a block quote.
+      Vale shall give me a hint that, there are typos in my block quote inside a block quote.
 
 End of Tests
 ============
