@@ -27,7 +27,7 @@ Find typos in notes inside notes
 
    .. note::
 
-      Vale shall give me a hint that, there are typos in my secound note.
+      Vale shall give me a hint that, there are typos in my second note.
 
 
 Find typos in literal blocks
