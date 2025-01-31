@@ -5,7 +5,9 @@ import re
 
 
 # here you can append the path to your configuration to extract the used needs
-sys.path.append(os.path.abspath('../../docs'))
+p = Path(__file__).parent.resolve().joinpath('../../docs').resolve()
+sys.path.append(p.as_posix())
+
 
 def replace_directives():
 
@@ -17,8 +19,8 @@ def replace_directives():
 
    for need in needs_types:
          need_name = need['directive']
-         needpattern =    "\.\.(\s+)" + need_name + "::"
-         replacepattern = "  \1" + " " * len(need_name) + "  "
+         needpattern =    r"\.\.(\s+)" + r'{}'.format(need_name) + r"::"
+         replacepattern = r"  \1" + r" " * len(need_name) + r"  "
          replacements.append((needpattern, replacepattern))
 
    # end:
@@ -48,22 +50,22 @@ def replace_roles():
    roles = ["need", "need_incoming", "need_outgoing", "need_part", "np", "need_count", "need_func", "ndf", ]
 
    for role in roles:
-      rolepattern = ":" + role + ":"
-      replacepattern = " " + " " * len(role) + " "
+      rolepattern = r":" + r'{}'.format(role) + r":"
+      replacepattern = r" " + r" " * len(role) + r" "
       replacements.append((rolepattern, replacepattern))
 
       from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
 
    for key, value in NEED_DEFAULT_OPTIONS.items():
-      optionpattern = "\s+:" + key + ":.*"
-      replacepattern = " " + " " * len(key) + " "
+      optionpattern = r"\s+:" + r'{}'.format(key) + r":.*"
+      replacepattern = r" " + r" " * len(key) + r" "
       replacements.append((optionpattern, replacepattern))
 
    from metamodel import needs_extra_options
 
    for option in needs_extra_options:
-      optionpattern = "\s+:" + option + ":.*"
-      replacepattern = " " + " " * len(option) + " "
+      optionpattern = r"\s+:" + r'{}'.format(option) + r":.*"
+      replacepattern = r" " + r" " * len(option) + r" "
       replacements.append((optionpattern, replacepattern))
 
    #end:
@@ -81,37 +83,51 @@ def replace_additional_strings():
 class clean_rst:
 
    def __init__(self):
-      this.directives = replace_directives()
-      this.directive_roles = replace_directive_roles()
-      this.roles = replace_roles()
-      this.additional_strings = replace_additional_strings()
+      self.directives = replace_directives()
+      self.directive_roles = replace_directive_roles()
+      self.roles = replace_roles()
+      self.additional_strings = replace_additional_strings()
 
-      this.replacements = this.directives + this.directive_roles + this.roles + this.additional_strings
+      self.replacements = self.directives + self.directive_roles + self.roles + self.additional_strings
 
-   def replace_content_in_file(file):
+   def replace_content_in_file(self, file):
+
+      print("replace file: " + str(file))
 
       content = file.read_text()
 
-      for replacement in this.replacements:
-         content = re.sub(r"" + str(replacement[0]), r"" + str(replacement[1]), content)
+      for replacement in self.replacements:
+         content = re.sub(replacement[0], replacement[1], content)
 
       file.write_text(content)
 
       return True
 
-   def replace_content_in_files(folder_path, filepattern:str='**/*.rst'):
+   def replace_content_in_files(self, folder_path, filepattern:str='**/*.rst'):
 
       success = True
 
-      p = Path(folder_path)
+      p = Path(folder_path).resolve()
 
-      files = Path(directory).glob(filepattern)
+      #print(p)
 
-      for file in pfiles:
+      files = p.glob(filepattern)
 
-         success = success and replace_content_in_file(file)
+      #print(list(files))
+
+      for file in files:
+
+         success = success and self.replace_content_in_file(file)
 
          if not success:
             break
 
       return success
+
+if __name__ == '__main__':
+
+   p = Path(__file__).parent.resolve().joinpath('../..').resolve()
+
+   cr = clean_rst()
+
+   cr.replace_content_in_files(p)

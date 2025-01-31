@@ -2,9 +2,6 @@ import os
 import sys
 sys.path.append(os.path.abspath('.'))
 
-from sphinx_needs.config import NeedsSphinxConfig
-from sphinx_needs.filter_common import filter_needs
-
 
 # sphinx_needs configuration
 needs_id_regex = '^[A-Za-z0-9_-]{3,}'
@@ -293,6 +290,10 @@ def fetch_elements(app, need, needs, *args, **kwargs):
     :param filter: str | None = None
     :return: str,int,float or list of elements of type str,int,float
     """
+
+    from sphinx_needs.config import NeedsSphinxConfig
+    from sphinx_needs.filter_common import filter_needs
+
     linked = []
     if 'filter' in kwargs:
         filter = kwargs['filter']
