@@ -93,7 +93,7 @@ class clean_rst:
       content = file.read_text()
 
       for replacement in this.replacements:
-         content = re.sub(replacement[0], replacement[1], content)
+         content = re.sub(r"" + str(replacement[0]), r"" + str(replacement[1]), content)
 
       file.write_text(content)
 
