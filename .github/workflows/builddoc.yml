@@ -37,13 +37,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install setuptools
-        python -m pip install docutils sphinx-lint vale
+        python -m pip install sphinx-lint
+        python -m pip install docutils vale
+        # for replace_directives.py
+        python -m pip install sphinx-needs
     - name: Lint the project with sphinx-lint
       run: |
-        python .vale/scripts/replace_directives.py
+        sphinx-lint
     - name: replace directives in rst
       run: |
-        sphinx-lint
+        python .vale/scripts/replace_directives.py
     - name: Lint the project with vale
       uses: errata-ai/vale-action@v2.1.1
       with:
