@@ -8,6 +8,8 @@ import re
 p = Path(__file__).parent.resolve().joinpath('../../docs').resolve()
 sys.path.append(p.as_posix())
 
+def replace_match_with_spaces(match):
+   return " " * len(match.group(0))
 
 def replace_directives():
 
@@ -20,7 +22,7 @@ def replace_directives():
    for need in needs_types:
          need_name = need['directive']
          needpattern =    r"\.\.(\s+)" + r'{}'.format(need_name) + r"::"
-         replacepattern = r"  \1" + r" " * len(need_name) + r"  "
+         replacepattern = replace_match_with_spaces
          replacements.append((needpattern, replacepattern))
 
    # end:
@@ -37,15 +39,15 @@ def replace_directive_options():
    from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
 
    for key, value in NEED_DEFAULT_OPTIONS.items():
-      optionpattern = r"\s+:" + r'{}'.format(key) + r":" + r".*"
-      replacepattern = r" " + r" " * len(key) + r" " + r"\n"
+      optionpattern =  r":" + r'{}'.format(key) + r":" + r"[^\n\r]*"
+      replacepattern = replace_match_with_spaces
       replacements.append((optionpattern, replacepattern))
 
    from metamodel import needs_extra_options
 
    for option in needs_extra_options:
-      optionpattern = r"\s+:" + r'{}'.format(option) + r":" + r".*"
-      replacepattern = r" " + r" " * len(option) + r" " + r"\n"
+      optionpattern =  r":" + r'{}'.format(option) + r":" + r"[^\n\r]*"
+      replacepattern = replace_match_with_spaces
       replacements.append((optionpattern, replacepattern))
    #end:
 
@@ -58,18 +60,11 @@ def replace_directive_links():
 
    # you have to adapt how to extract your directives to be replaced
    # start:
-   from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
-
-   for key, value in NEED_DEFAULT_OPTIONS.items():
-      optionpattern = r"\s+:" + r'{}'.format(key) + r":" + r".*"
-      replacepattern = r" " + r" " * len(key) + r" " + r"\n"
-      replacements.append((optionpattern, replacepattern))
-
    from metamodel import needs_extra_links
 
    for link in needs_extra_links:
-      optionpattern = r"\s+:" + r'{}'.format(link["option"]) + r":" + r".*"
-      replacepattern = r" " + r" " * len(link["option"]) + r" " + r"\n"
+      optionpattern =  r":" + r'{}'.format(link["option"]) + r":" + r"[^\n\r]*"
+      replacepattern = replace_match_with_spaces
       replacements.append((optionpattern, replacepattern))
    #end:
 
@@ -86,9 +81,12 @@ def replace_roles():
    roles = ["need", "need_incoming", "need_outgoing", "need_part", "np", "need_count", "need_func", "ndf", ]
 
    for role in roles:
-      rolepattern = r":" + r'{}'.format(role) + r":"
-      replacepattern = r" " + r" " * len(role) + r" "
+      rolepattern =    r":" + r'{}'.format(role) + r":" + r"`[^`]*`"
+      replacepattern = replace_match_with_spaces
       replacements.append((rolepattern, replacepattern))
+
+   replacements = []
+   #currently disabled
 
    #end:
 
@@ -107,10 +105,13 @@ class clean_rst:
    def __init__(self):
       self.directives = replace_directives()
       self.directive_options = replace_directive_options()
+      self.directive_links = replace_directive_links()
       self.roles = replace_roles()
       self.additional_strings = replace_additional_strings()
 
-      self.replacements = self.directives + self.directive_options + self.roles + self.additional_strings
+      self.replacements = self.directives + \
+                          self.directive_options + self.directive_links + \
+                          self.roles + self.additional_strings
 
    def replace_content_in_file(self, file):
 
