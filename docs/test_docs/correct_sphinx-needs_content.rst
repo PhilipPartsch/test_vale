@@ -38,7 +38,8 @@ Examples form another repository
 Examples for references
 =======================
 
-Here we reference to a need with :need:`CSTRQ_MERGE_DICTS`.
+Here we reference to a need with id CSTRQ_MERGE_DICTS via
+:need:`CSTRQ_MERGE_DICTS`.
 
 This shall even work within a need:
 
