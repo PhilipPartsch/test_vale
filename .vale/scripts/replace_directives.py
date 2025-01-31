@@ -28,13 +28,49 @@ def replace_directives():
    return replacements
 
 
-def replace_directive_roles():
+def replace_directive_options():
 
    replacements = []
 
    # you have to adapt how to extract your directives to be replaced
    # start:
+   from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
 
+   for key, value in NEED_DEFAULT_OPTIONS.items():
+      optionpattern = r"\s+:" + r'{}'.format(key) + r":" + r".*"
+      replacepattern = r" " + r" " * len(key) + r" " + r"\n"
+      replacements.append((optionpattern, replacepattern))
+
+   from metamodel import needs_extra_options
+
+   for option in needs_extra_options:
+      optionpattern = r"\s+:" + r'{}'.format(option) + r":" + r".*"
+      replacepattern = r" " + r" " * len(option) + r" " + r"\n"
+      replacements.append((optionpattern, replacepattern))
+   #end:
+
+   return replacements
+
+
+def replace_directive_links():
+
+   replacements = []
+
+   # you have to adapt how to extract your directives to be replaced
+   # start:
+   from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
+
+   for key, value in NEED_DEFAULT_OPTIONS.items():
+      optionpattern = r"\s+:" + r'{}'.format(key) + r":" + r".*"
+      replacepattern = r" " + r" " * len(key) + r" " + r"\n"
+      replacements.append((optionpattern, replacepattern))
+
+   from metamodel import needs_extra_links
+
+   for link in needs_extra_links:
+      optionpattern = r"\s+:" + r'{}'.format(link["option"]) + r":" + r".*"
+      replacepattern = r" " + r" " * len(link["option"]) + r" " + r"\n"
+      replacements.append((optionpattern, replacepattern))
    #end:
 
    return replacements
@@ -54,20 +90,6 @@ def replace_roles():
       replacepattern = r" " + r" " * len(role) + r" "
       replacements.append((rolepattern, replacepattern))
 
-      from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
-
-   for key, value in NEED_DEFAULT_OPTIONS.items():
-      optionpattern = r"\s+:" + r'{}'.format(key) + r":.*"
-      replacepattern = r" " + r" " * len(key) + r" "
-      replacements.append((optionpattern, replacepattern))
-
-   from metamodel import needs_extra_options
-
-   for option in needs_extra_options:
-      optionpattern = r"\s+:" + r'{}'.format(option) + r":.*"
-      replacepattern = r" " + r" " * len(option) + r" "
-      replacements.append((optionpattern, replacepattern))
-
    #end:
 
    return replacements
@@ -84,11 +106,11 @@ class clean_rst:
 
    def __init__(self):
       self.directives = replace_directives()
-      self.directive_roles = replace_directive_roles()
+      self.directive_options = replace_directive_options()
       self.roles = replace_roles()
       self.additional_strings = replace_additional_strings()
 
-      self.replacements = self.directives + self.directive_roles + self.roles + self.additional_strings
+      self.replacements = self.directives + self.directive_options + self.roles + self.additional_strings
 
    def replace_content_in_file(self, file):
 
