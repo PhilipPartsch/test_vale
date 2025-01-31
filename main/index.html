@@ -35,7 +35,8 @@
       <script src="_static/assets/sphinx_preview.js?v=ddf23a0a"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="File for testing vale without typos" href="test_docs/correct_rst_content.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,24 +58,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">Repository to test Vale</a><ul>
-<li><a class="reference internal" href="#tests">Tests</a><ul>
-<li><a class="reference internal" href="#find-typos">Find typos</a></li>
-<li><a class="reference internal" href="#find-typos-in-notes">Find typos in notes</a></li>
-<li><a class="reference internal" href="#find-typos-in-notes-inside-notes">Find typos in notes inside notes</a></li>
-<li><a class="reference internal" href="#find-typos-in-literal-blocks">Find typos in literal blocks</a></li>
-<li><a class="reference internal" href="#find-typos-in-literal-quotes-inside-literal-quotes">Find typos in literal quotes inside literal quotes</a></li>
-<li><a class="reference internal" href="#find-typos-in-block-quotes">Find typos in block quotes</a></li>
-<li><a class="reference internal" href="#find-typos-in-block-quotes-inside-block-quotes">Find typos in block quotes inside block quotes</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test_docs/correct_rst_content.html">File for testing vale without typos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_docs/sphinx-needs_content.html">Test file with Sphinx-Needs content</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#end-of-tests">End of Tests</a></li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -102,71 +91,33 @@
   <section id="repository-to-test-vale">
 <h1>Repository to test Vale<a class="headerlink" href="#repository-to-test-vale" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="test_docs/correct_rst_content.html">File for testing vale without typos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="test_docs/correct_rst_content.html#tests">Tests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos">Find typos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-notes">Find typos in notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-notes-inside-notes">Find typos in notes inside notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-literal-blocks">Find typos in literal blocks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-literal-quotes-inside-literal-quotes">Find typos in literal quotes inside literal quotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-block-quotes">Find typos in block quotes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="test_docs/correct_rst_content.html#find-typos-in-block-quotes-inside-block-quotes">Find typos in block quotes inside block quotes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_docs/correct_rst_content.html#end-of-tests">End of Tests</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="test_docs/sphinx-needs_content.html">Test file with Sphinx-Needs content</a></li>
+</ul>
 </div>
-<section id="tests">
-<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h2>
-<section id="find-typos">
-<h3>Find typos<a class="headerlink" href="#find-typos" title="Link to this heading"></a></h3>
-<p>Vale shall give me a hint that, there are typos in my texxt.</p>
-</section>
-<section id="find-typos-in-notes">
-<h3>Find typos in notes<a class="headerlink" href="#find-typos-in-notes" title="Link to this heading"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Vale shall give me a hint that, there are typos in my noote.</p>
-</div>
-</section>
-<section id="find-typos-in-notes-inside-notes">
-<h3>Find typos in notes inside notes<a class="headerlink" href="#find-typos-in-notes-inside-notes" title="Link to this heading"></a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Vale shall give me a hint that, there are typos in my note.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Vale shall give me a hint that, there are typos in my secoound note.</p>
-</div>
-</div>
-</section>
-<section id="find-typos-in-literal-blocks">
-<h3>Find typos in literal blocks<a class="headerlink" href="#find-typos-in-literal-blocks" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my litteral blocks.</p>
-</div></blockquote>
-</section>
-<section id="find-typos-in-literal-quotes-inside-literal-quotes">
-<h3>Find typos in literal quotes inside literal quotes<a class="headerlink" href="#find-typos-in-literal-quotes-inside-literal-quotes" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my literal quote.</p>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my liiteral quote inside a literal quote.</p>
-</div></blockquote>
-</div></blockquote>
-</section>
-<section id="find-typos-in-block-quotes">
-<h3>Find typos in block quotes<a class="headerlink" href="#find-typos-in-block-quotes" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my blocck quote.</p>
-</div></blockquote>
-</section>
-<section id="find-typos-in-block-quotes-inside-block-quotes">
-<h3>Find typos in block quotes inside block quotes<a class="headerlink" href="#find-typos-in-block-quotes-inside-block-quotes" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my block quote.</p>
-<blockquote>
-<div><p>Vale shall give me a hint that, there are typos in my blockk quote inside a block quote.</p>
-</div></blockquote>
-</div></blockquote>
-</section>
-</section>
-<section id="end-of-tests">
-<h2>End of Tests<a class="headerlink" href="#end-of-tests" title="Link to this heading"></a></h2>
-</section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="test_docs/correct_rst_content.html" class="btn btn-neutral float-right" title="File for testing vale without typos" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
