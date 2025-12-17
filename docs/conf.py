@@ -135,7 +135,8 @@ needs_services = metamodel.needs_services
 
 needs_layouts = metamodel.needs_layouts
 
-needs_global_options = metamodel.needs_global_options
+# disabled, as transistion to new sphinx-needs config is not neeeded
+# needs_global_options = metamodel.needs_global_options
 
 needs_render_context = metamodel.needs_render_context
 
