@@ -1,5 +1,5 @@
 sphinx
-sphinx-needs
+sphinx-needs==5.1.0
 matplotlib # for sphinx-needs
 sphinx-immaterial
 sphinx-rtd-theme
