@@ -41,7 +41,7 @@ def replace_directive_options():
       SPHINX_NEED_DEFAULT_OPTIONS = NEED_DEFAULT_OPTIONS
    except:
       try:
-         from sphinx_needs.data. import NeedsCoreFields
+         from sphinx_needs.data import NeedsCoreFields
          SPHINX_NEED_DEFAULT_OPTIONS = NeedsCoreFields
       except:
          SPHINX_NEED_DEFAULT_OPTIONS = {}
