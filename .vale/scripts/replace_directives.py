@@ -36,9 +36,17 @@ def replace_directive_options():
 
    # you have to adapt how to extract your directives to be replaced
    # start:
-   from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
+   try:
+      from sphinx_needs.defaults import NEED_DEFAULT_OPTIONS
+      SPHINX_NEED_DEFAULT_OPTIONS = NEED_DEFAULT_OPTIONS
+   except:
+      try:
+         from sphinx_needs.data. import NeedsCoreFields
+         SPHINX_NEED_DEFAULT_OPTIONS = NeedsCoreFields
+      except:
+         SPHINX_NEED_DEFAULT_OPTIONS = {}
 
-   for key, value in NEED_DEFAULT_OPTIONS.items():
+   for key, value in SPHINX_NEED_DEFAULT_OPTIONS.items():
       optionpattern =  r":" + r'{}'.format(key) + r":" + r"[^\n\r]*"
       replacepattern = replace_match_with_spaces
       replacements.append((optionpattern, replacepattern))
